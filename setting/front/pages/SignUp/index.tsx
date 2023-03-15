@@ -1,6 +1,6 @@
 import useInput from '@hooks/useInput';
 import React, { useCallback, useState, VFC } from 'react';
-
+import axios from 'axios';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from './styles';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -37,6 +37,19 @@ const SignUp = () => {
 
       if (!mismatchError) {
         console.log('서버로 회원가입하기');
+        axios
+          .post('/api/users', {
+            email,
+            nickname,
+            password,
+          })
+          .then((response) => {
+            console.log(response);
+          }) //🔥성공하는 경우
+          .catch((error) => {
+            console.log(error);
+          }) //🔥실패하는 경우
+          .finally(() => {}); //🔥성공하든 실패하든 공통적으로 하고 싶은 경우
       }
     },
     [email, nickname, password, passwordCheck, mismatchError],
