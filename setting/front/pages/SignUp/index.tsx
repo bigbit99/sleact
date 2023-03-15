@@ -13,7 +13,7 @@ const SignUp = () => {
   const [signUpError, setSignUpError] = useState('');
   const [signUpSuccess, setSignUpSuccess] = useState(false);
 
-  //useCallback을 써주어야 성능 최적화가 됨...
+  //useCallback을 써주어야 성능 최적화가 됨
 
   const onChangePassword = useCallback(
     (e) => {
@@ -37,17 +37,21 @@ const SignUp = () => {
 
       if (!mismatchError) {
         console.log('서버로 회원가입하기');
+        setSignUpError('');
+        setSignUpSuccess(false); //🔥비동기 요청 전 setState들을 초기화 해주는 것이 좋다. 요청을 연달아 보낼 때 첫번째 요청의 결과가 다음 요청에 남아있는 문제를 방지해줌
         axios
-          .post('/api/users', {
+          .post('http://localhost:3095/api/users', {
             email,
             nickname,
             password,
           })
           .then((response) => {
             console.log(response);
+            setSignUpSuccess(true);
           }) //🔥성공하는 경우
           .catch((error) => {
             console.log(error);
+            setSignUpError(error.response.data); //에러났을 때 에러메시지 출력 , error났을 때 응답(response)의 data
           }) //🔥실패하는 경우
           .finally(() => {}); //🔥성공하든 실패하든 공통적으로 하고 싶은 경우
       }
