@@ -30,8 +30,8 @@ const LogIn = () => {
             withCredentials: true, //쿠키생성해줌
           },
         )
-        .then(() => {
-          mutate();
+        .then((response) => {
+          mutate(response.data, false);
         })
         .catch((error) => {
           setLogInError(error.response?.data?.statusCode === 401);
