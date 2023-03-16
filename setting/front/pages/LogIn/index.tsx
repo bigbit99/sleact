@@ -3,13 +3,15 @@ import React, { useCallback, useState } from 'react';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from '@pages/SignUp/styles';
 import fetcher from '@utils/fetcher';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import useSWR from 'swr';
+import Loading from '@components/Loading';
 
 const LogIn = () => {
-  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher, {
-    dedupingInterval: 100000, //주기적으로 호출은 되지만 dedupingInterval 기간 내에는 캐시에서 불러온다.
-  }); //로그인 후 데이터를 전해줄 api
+  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
+  // const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher, {
+  //   dedupingInterval: 100000, //주기적으로 호출은 되지만 dedupingInterval 기간 내에는 캐시에서 불러온다.
+  // }); //로그인 후 데이터를 전해줄 api
   //swr자체는 별 역할을 안함.
   //api부분이 fetcher함수의 매개변수로 넘어감
   const [logInError, setLogInError] = useState(false);
@@ -19,6 +21,7 @@ const LogIn = () => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      setLogInError(false);
       axios
         .post(
           'http://localhost:3095/api/users/login',
@@ -36,6 +39,14 @@ const LogIn = () => {
     },
     [email, password],
   );
+
+  if (data === undefined) {
+    return <Loading />;
+  }
+
+  if (data) {
+    return <Redirect to="/workspace/channel" />;
+  }
 
   return (
     <div id="container">

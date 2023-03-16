@@ -3,8 +3,12 @@ import React, { useCallback, useState, VFC } from 'react';
 import axios from 'axios';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from './styles';
 import { Link, Redirect } from 'react-router-dom';
+import useSWR from 'swr';
+import fetcher from '@utils/fetcher';
+import Loading from '@components/Loading';
 
 const SignUp = () => {
+  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, setPassword] = useState('');
@@ -59,6 +63,14 @@ const SignUp = () => {
     [email, nickname, password, passwordCheck, mismatchError],
   );
 
+  if (data === undefined) {
+    return <Loading />;
+  }
+
+  if (data) {
+    return <Redirect to="/workspace/channel" />;
+  }
+  //🔥🔥🔥return은 항상 hooks보다 아래에 있어야 함!!!🔥🔥🔥
   return (
     <div id="container">
       <Header>Sleact</Header>
