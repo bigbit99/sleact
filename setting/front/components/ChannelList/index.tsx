@@ -7,9 +7,12 @@ import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 
+//swr을 쓰면서 props로 데이터를 넘겨줄 필요 없이 바로 swr을 써줌
+
 const ChannelList: FC = () => {
   const { workspace } = useParams<{ workspace?: string }>();
   // const [socket] = useSocket(workspace);
+
   const {
     data: userData,
     error,
@@ -17,7 +20,9 @@ const ChannelList: FC = () => {
   } = useSWR<IUser>('/api/users', fetcher, {
     dedupingInterval: 2000, // 2초
   });
+
   const { data: channelData } = useSWR<IChannel[]>(userData ? `/api/workspaces/${workspace}/channels` : null, fetcher);
+
   const [channelCollapse, setChannelCollapse] = useState(false);
 
   const toggleChannelCollapse = useCallback(() => {

@@ -8,19 +8,15 @@ import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 
-interface Props {
-  userData?: IUser;
-}
-
-const DMList: FC<Props> = ({ userData }) => {
+const DMList: FC = () => {
   const { workspace } = useParams<{ workspace?: string }>();
-  // const {
-  //   data: userData,
-  //   error,
-  //   mutate,
-  // } = useSWR<IUser>('/api/users', fetcher, {
-  //   dedupingInterval: 2000, // 2초
-  // });
+  const {
+    data: userData,
+    error,
+    mutate,
+  } = useSWR<IUser>('/api/users', fetcher, {
+    dedupingInterval: 2000, // 2초
+  });
   const { data: memberData } = useSWR<IUserWithOnline[]>(
     userData ? `/api/workspaces/${workspace}/members` : null,
     fetcher,

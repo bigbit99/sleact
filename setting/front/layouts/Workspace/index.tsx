@@ -183,10 +183,7 @@ const Workspace: VFC = () => {
               </WorkspaceModal>
             </Menu>
             <ChannelList />
-            <DMList userData={userData} />
-            {/* {channelData?.map((v) => (
-              <div>{v?.name}</div>
-            ))} */}
+            <DMList />
           </MenuScroll>
         </Channels>
         <Chats>
