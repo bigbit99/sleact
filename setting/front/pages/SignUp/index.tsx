@@ -8,7 +8,7 @@ import fetcher from '@utils/fetcher';
 import Loading from '@components/Loading';
 
 const SignUp = () => {
-  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
+  const { data, error, mutate } = useSWR('/api/users', fetcher);
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, setPassword] = useState('');
@@ -44,7 +44,7 @@ const SignUp = () => {
         setSignUpError('');
         setSignUpSuccess(false); //🔥비동기 요청 전 setState들을 초기화 해주는 것이 좋다. 요청을 연달아 보낼 때 첫번째 요청의 결과가 다음 요청에 남아있는 문제를 방지해줌
         axios
-          .post('http://localhost:3095/api/users', {
+          .post('/api/users', {
             email,
             nickname,
             password,
@@ -68,7 +68,7 @@ const SignUp = () => {
   }
 
   if (data) {
-    return <Redirect to="/workspace/channel" />;
+    return <Redirect to="/workspace/sleact/channel/일반" />;
   }
   //🔥🔥🔥return은 항상 hooks보다 아래에 있어야 함!!!🔥🔥🔥
   return (

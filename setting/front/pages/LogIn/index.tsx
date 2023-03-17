@@ -8,7 +8,7 @@ import useSWR from 'swr';
 import Loading from '@components/Loading';
 
 const LogIn = () => {
-  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
+  const { data, error, mutate } = useSWR('/api/users', fetcher);
   // const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher, {
   //   dedupingInterval: 100000, //주기적으로 호출은 되지만 dedupingInterval 기간 내에는 캐시에서 불러온다.
   // }); //로그인 후 데이터를 전해줄 api
@@ -24,7 +24,7 @@ const LogIn = () => {
       setLogInError(false);
       axios
         .post(
-          'http://localhost:3095/api/users/login',
+          '/api/users/login',
           { email, password },
           {
             withCredentials: true, //쿠키생성해줌
@@ -45,7 +45,7 @@ const LogIn = () => {
   }
 
   if (data) {
-    return <Redirect to="/workspace/channel" />;
+    return <Redirect to="/workspace/sleact/channel/일반" />;
   }
 
   return (

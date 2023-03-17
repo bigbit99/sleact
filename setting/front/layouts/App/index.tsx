@@ -12,7 +12,8 @@ const App = () => {
       <Redirect exact path="/" to="/login" />
       <Route path="/login" component={LogIn} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/workspace" component={Workspace} />
+      <Route path="/workspace/:workspace" component={Workspace} />
+      {/* 🔥라우터 주소설계(라우트 파라미터) - /workspace/:workspace 부분은 사용자가 자유롭게 주소를 바꿀 수 있는 부분 */}
     </Switch>
   );
 };
