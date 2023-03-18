@@ -1,6 +1,12 @@
-import { ChatArea, Form, MentionsTextarea, SendButton, Toolbox } from '@components/ChatBox/styles';
+import { ChatArea, EachMention, Form, MentionsTextarea, SendButton, Toolbox } from '@components/ChatBox/styles';
+import { IUser } from '@typings/db';
+import fetcher from '@utils/fetcher';
 import React, { useCallback, useEffect, useRef, VFC } from 'react';
 import autosize from 'autosize';
+import { Mention, SuggestionDataItem } from 'react-mentions';
+import { useParams } from 'react-router';
+import useSWR from 'swr';
+import gravatar from 'gravatar';
 
 interface Props {
   chat: string;
@@ -8,12 +14,18 @@ interface Props {
   onChangeChat: (e: any) => void;
   placeholder?: string;
 }
-
 const ChatBox: VFC<Props> = ({ chat, onSubmitForm, onChangeChat, placeholder }) => {
-  // const onSubmitForm = useCallback(() => {}, []); //챗박스는 dm이랑 채널메시지 등 재사용 되어야하는 동작이라,
-  //컴포넌트에서 구체적으로 작동하지 않고, props로 올려줄거임
+  const { workspace } = useParams<{ workspace: string }>();
+  const {
+    data: userData,
+    error,
+    mutate,
+  } = useSWR<IUser | false>('/api/users', fetcher, {
+    dedupingInterval: 2000, // 2초
+  });
+  const { data: memberData } = useSWR<IUser[]>(userData ? `/api/workspaces/${workspace}/members` : null, fetcher);
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null); //태그에 직접 접근하고 싶을 때 ref를 쓴다!
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (textareaRef.current) {
       autosize(textareaRef.current);
@@ -32,6 +44,28 @@ const ChatBox: VFC<Props> = ({ chat, onSubmitForm, onChangeChat, placeholder }) 
     [onSubmitForm],
   );
 
+  const renderSuggestion = useCallback(
+    (
+      suggestion: SuggestionDataItem,
+      search: string,
+      highlightedDisplay: React.ReactNode,
+      index: number,
+      focus: boolean,
+    ): React.ReactNode => {
+      if (!memberData) return;
+      return (
+        <EachMention focus={focus}>
+          <img
+            src={gravatar.url(memberData[index].email, { s: '20px', d: 'retro' })}
+            alt={memberData[index].nickname}
+          />
+          <span>{highlightedDisplay}</span>
+        </EachMention>
+      );
+    },
+    [memberData],
+  );
+
   return (
     <ChatArea>
       <Form onSubmit={onSubmitForm}>
@@ -39,10 +73,18 @@ const ChatBox: VFC<Props> = ({ chat, onSubmitForm, onChangeChat, placeholder }) 
           id="editor-chat"
           value={chat}
           onChange={onChangeChat}
-          onKeyDown={onKeydownChat}
+          onKeyPress={onKeydownChat}
           placeholder={placeholder}
-          ref={textareaRef}
-        />
+          inputRef={textareaRef}
+          allowSuggestionsAboveCursor
+        >
+          <Mention
+            appendSpaceOnAdd
+            trigger="@"
+            data={memberData?.map((v) => ({ id: v.id, display: v.nickname })) || []}
+            renderSuggestion={renderSuggestion}
+          />
+        </MentionsTextarea>
         <Toolbox>
           <SendButton
             className={
