@@ -20,6 +20,7 @@ const ChannelList: FC = () => {
   } = useSWR<IUser>('/api/users', fetcher, {
     dedupingInterval: 2000, // 2초
   });
+  //swr장점은 자식에게 props넘겨주는 방식이 아니라서, 자식과 부모의 연결고리가 줄어들어서 리랜더링이 줄어듬, 최적화 원리랑 비슷함
 
   const { data: channelData } = useSWR<IChannel[]>(userData ? `/api/workspaces/${workspace}/channels` : null, fetcher);
 
