@@ -1,4 +1,4 @@
-import React, { VFC, useCallback, useState } from 'react';
+import React, { VFC, useCallback, useState, useEffect } from 'react';
 import fetcher from '@utils/fetcher';
 import useSWR from 'swr';
 import axios from 'axios';
@@ -33,6 +33,7 @@ import InviteWorkspaceModal from '@components/InviteWorkspaceModal';
 import InviteChannelModal from '@components/InviteChannelModal';
 import DMList from '@components/DMList';
 import ChannelList from '@components/ChannelList';
+import useSocket from '@hooks/useSocket';
 
 const Channel = loadable(() => import('@pages/Channel'));
 const DirectMessage = loadable(() => import('@pages/DirectMessage'));
@@ -65,6 +66,21 @@ const Workspace: VFC = () => {
   //멤버데이터
   const { mutate: memberData } = useSWR<IUser[]>(userData ? `/api/workspaces/${workspace}/members` : null, fetcher);
 
+  const [socket, disconnect] = useSocket(workspace);
+
+  useEffect(() => {
+    if (channelData && userData && socket) {
+      console.log(socket);
+      socket.emit('login', { id: userData.id, channels: channelData.map((v) => v.id) });
+    }
+  }, [socket, channelData, userData]);
+
+  useEffect(() => {
+    return () => {
+      disconnect();
+    };
+  }, [workspace, disconnect]);
+
   const onLogout = useCallback(() => {
     axios
       .post('/api/users/logout', null, {
@@ -73,7 +89,7 @@ const Workspace: VFC = () => {
       .then(() => {
         mutate(false, false);
       });
-  }, []);
+  }, [mutate]);
 
   const onCloseUserProfile = useCallback((e) => {
     e.stopPropagation();
