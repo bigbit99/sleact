@@ -25,6 +25,7 @@ export const MentionsTextarea = styled.div`
     background: skyblue;
   }
   & textarea {
+    width: 100%;
     height: 44px;
     padding: 9px 10px !important;
     outline: none !important;
