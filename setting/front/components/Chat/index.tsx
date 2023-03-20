@@ -17,7 +17,7 @@ const Chat: VFC<Props> = ({ data }) => {
     () =>
       regexifyString({
         input: data.content,
-        pattern: /@\[.+?\]\(\d+?\)|\n]/g,
+        pattern: /@\[(.+?)]\((\d+?)\)|\n/g,
         decorator(match, index) {
           const arr: string[] | null = match.match(/@\[(.+?)]\((\d+?)\)/)!;
           if (arr) {

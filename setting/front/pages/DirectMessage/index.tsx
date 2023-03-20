@@ -9,6 +9,7 @@ import ChatList from '@components/ChatList';
 import useInput from '@hooks/useInput';
 import axios from 'axios';
 import { IDM } from '@typings/db';
+import makeSection from '@utils/makeSection';
 
 const DirectMessage = () => {
   const { workspace, id } = useParams<{ workspace: string; id: string }>();
@@ -49,13 +50,16 @@ const DirectMessage = () => {
     return null;
   }
 
+  const chatSections = makeSection(chatData ? [...chatData].reverse() : []);
+  //concat - 불변성 지켜주는 메서드 / 기존껀 가만있고 새로운 배열 생성해줌. [...]스프레드 연산자
+
   return (
     <Container>
       <Header>
         <img src={gravatar.url(userData.email, { s: '24px', d: 'retro' })} alt={userData.nickname} />
         <span>{userData.nickname}</span>
       </Header>
-      <ChatList chatData={chatData} />
+      <ChatList chatSections={chatSections} />
       <ChatBox chat={chat} onChangeChat={onChangeChat} onSubmitForm={onSubmitForm} />
     </Container>
   );
