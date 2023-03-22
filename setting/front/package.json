@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve --env development",
-    "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
+    "build": "cross-env webpack"
   },
   "author": "Hanbit",
   "license": "MIT",
