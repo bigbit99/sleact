@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  height: 64px;
+  height: 40px;
   display: flex;
   width: 100%;
   /* --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
@@ -21,8 +21,8 @@ export const Header = styled.header`
   align-items: center;
   > div:nth-child(1) {
     width: 180px;
-    height: 64px;
-    padding: 20px;
+    height: 40px;
+    padding: 15px;
     box-sizing: border-box;
     background-color: #1f1e1e;
     box-sizing: border-box;

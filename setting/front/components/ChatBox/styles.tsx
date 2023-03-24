@@ -2,11 +2,23 @@ import styled from '@emotion/styled';
 import { MentionsInput } from 'react-mentions';
 
 export const ChatArea = styled.div`
-  display: flex;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
   padding-top: 0;
   border-top: 1px solid #363636;
+  > div:nth-child(1) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    > p {
+      color: #979797;
+    }
+    > p:nth-child(4) {
+      color: #fff;
+      border-bottom: 1px solid #fff;
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -15,13 +27,16 @@ export const Form = styled.form`
   width: 100%;
   border-radius: 4px;
   border: 1px solid rgb(29, 28, 29);
+  display: flex;
+  justify-content: center;
 `;
 
 export const MentionsTextarea = styled(MentionsInput)`
   font-family: Slack-Lato, appleLogo, sans-serif;
   font-size: 15px;
-  padding: 8px 9px;
-  width: 100%;
+  padding: 20px 9px;
+  width: 80%;
+  border-right: 1px solid #363636;
   & strong {
     background: skyblue;
   }
@@ -33,6 +48,7 @@ export const MentionsTextarea = styled(MentionsInput)`
     resize: none !important;
     line-height: 22px;
     border: none;
+    color: #fff;
   }
   & ul {
     border: 1px solid lightgray;
@@ -46,20 +62,32 @@ export const MentionsTextarea = styled(MentionsInput)`
 `;
 
 export const Toolbox = styled.div`
-  position: relative;
-  background: rgb(248, 248, 248);
-  height: 41px;
+  width: 20%;
+  height: 20px;
+  padding-left: 5px;
+  background: transparent;
   display: flex;
-  border-top: 1px solid rgb(221, 221, 221);
-  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  /* height: 41px; */
+  /* border: 1px solid #363636; */
+  /* align-items: center;
+  display: flex;
   border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px; */
+  > span {
+    color: #fff;
+  }
 `;
 
 export const SendButton = styled.button`
-  position: absolute;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  cursor: pointer;
+  /* position: absolute;
   right: 5px;
-  top: 5px;
+  top: 5px; */
 `;
 
 export const EachMention = styled.button<{ focus: boolean }>`
