@@ -6,9 +6,9 @@ export const RightMenu = styled.div`
 
 export const Header = styled.header`
   height: 38px;
-  background: #350d36;
+  background: #323233;
   color: #ffffff;
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+
   padding: 5px;
   text-align: center;
 `;
@@ -57,6 +57,7 @@ export const LogOutButton = styled.button`
 export const WorkspaceWrapper = styled.div`
   display: flex;
   flex: 1;
+  background-color: #1e1e1e;
 `;
 
 export const Workspaces = styled.div`
@@ -64,16 +65,16 @@ export const Workspaces = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  background: #3f0e40;
-  border-top: 1px solid rgb(82, 38, 83);
-  border-right: 1px solid rgb(82, 38, 83);
+  background: #333333;
+  /* border-top: 1px solid rgb(82, 38, 83);
+  border-right: 1px solid rgb(82, 38, 83); */
   vertical-align: top;
   text-align: center;
   padding: 15px 0 0;
 `;
 
 export const Channels = styled.nav`
-  width: 260px;
+  width: 240px;
   display: inline-flex;
   flex-direction: column;
   background: #3f0e40;
@@ -125,11 +126,11 @@ export const WorkspaceName = styled.button`
   border: none;
   width: 100%;
   text-align: left;
-  border-top: 1px solid rgb(82, 38, 83);
-  border-bottom: 1px solid rgb(82, 38, 83);
+  /* border-top: 1px solid rgb(82, 38, 83);
+  border-bottom: 1px solid rgb(82, 38, 83); */
   font-weight: 900;
   font-size: 24px;
-  background: transparent;
+  background-color: #252526;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -141,6 +142,7 @@ export const WorkspaceName = styled.button`
 `;
 
 export const MenuScroll = styled.div`
+  background-color: #252526;
   height: calc(100vh - 102px);
   overflow-y: auto;
 `;
@@ -169,7 +171,7 @@ export const Chats = styled.div`
 `;
 
 export const AddButton = styled.button`
-  color: white;
+  color: #858585;
   font-size: 24px;
   display: inline-block;
   width: 40px;
@@ -184,11 +186,11 @@ export const WorkspaceButton = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: white;
-  border: 3px solid #3f0e40;
+  background: transparent;
+  border: 2px solid #858585;
   margin-bottom: 15px;
   font-size: 18px;
   font-weight: 700;
-  color: black;
+  color: #858585;
   cursor: pointer;
 `;

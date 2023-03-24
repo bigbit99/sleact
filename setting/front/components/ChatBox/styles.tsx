@@ -6,6 +6,7 @@ export const ChatArea = styled.div`
   width: 100%;
   padding: 20px;
   padding-top: 0;
+  border-top: 1px solid #363636;
 `;
 
 export const Form = styled.form`

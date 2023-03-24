@@ -12,17 +12,34 @@ export const Header = styled.header`
   height: 64px;
   display: flex;
   width: 100%;
-  --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
-  box-shadow: 0 1px 0 var(--saf-0);
-  padding: 20px 16px 20px 20px;
+  /* --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13); */
+  /* box-shadow: 0 1px 0 var(--saf-0); */
+  background-color: #2e2d2d;
   font-weight: bold;
   align-items: center;
-
+  > div:nth-child(1) {
+    width: 180px;
+    height: 64px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #1f1e1e;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > span {
+      display: block;
+      color: #fff;
+    }
+  }
   & .header-right {
     display: flex;
     flex: 1;
     justify-content: flex-end;
     align-items: center;
+    > span {
+      color: #8d8d8d;
+    }
   }
 `;
 

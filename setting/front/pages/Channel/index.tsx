@@ -184,7 +184,14 @@ const Channel = () => {
   return (
     <Container onDrop={onDrop} onDragOver={onDragOver}>
       <Header>
-        <span>#{channel}</span>
+        <div>
+          <span>#{channel}</span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="#fff">
+              <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+            </svg>
+          </span>
+        </div>
         <div className="header-right">
           <span>{channelMembersData?.length}</span>
           <button
@@ -194,7 +201,9 @@ const Channel = () => {
             data-sk="tooltip_parent"
             type="button"
           >
-            <i className="c-icon p-ia__view_header__button_icon c-icon--add-user" aria-hidden="true" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#fff">
+              <path d="M4 9.5a5 5 0 1 1 7.916 4.062 7.973 7.973 0 0 1 5.018 7.166.75.75 0 1 1-1.499.044 6.469 6.469 0 0 0-12.932 0 .75.75 0 0 1-1.499-.044 7.972 7.972 0 0 1 5.059-7.181A4.994 4.994 0 0 1 4 9.5ZM9 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm10.25-5a.75.75 0 0 1 .75.75V4h2.25a.75.75 0 0 1 0 1.5H20v2.25a.75.75 0 0 1-1.5 0V5.5h-2.25a.75.75 0 0 1 0-1.5h2.25V1.75a.75.75 0 0 1 .75-.75Z"></path>
+            </svg>
           </button>
         </div>
       </Header>
