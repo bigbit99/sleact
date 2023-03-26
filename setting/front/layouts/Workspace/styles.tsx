@@ -8,9 +8,12 @@ export const Header = styled.header`
   height: 38px;
   background: #323233;
   color: #ffffff;
-
   padding: 5px;
   text-align: center;
+  box-sizing: border-box;
+  > p {
+    text-align: center;
+  }
 `;
 
 export const ProfileImg = styled.img`

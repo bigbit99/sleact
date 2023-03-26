@@ -151,6 +151,7 @@ const Workspace: VFC = () => {
   return (
     <div>
       <Header>
+        <p>index.tsx - sleact</p>
         <RightMenu>
           <span onClick={onClickUserProfile}>
             <ProfileImg src={gravatar.url(userData.email, { s: '28px', d: 'retro' })} alt={userData.nickname} />
